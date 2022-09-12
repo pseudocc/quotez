@@ -6,20 +6,20 @@ INSTALL=install
 DESTDIR=${PREFIX}/bin
 LDFLAGS+=-ljson-c
 
-all: quotex
+all: quotez
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $^ -o $@
 
-quotex: quotex.o
+quotez: quotez.o
 	$(CC) $^ $(LDFLAGS) -o $@
 
 .PHONY:
-install: quotex quotes.json
+install: quotez quotes.json
 	$(INSTALL) -d $(DESTDIR)
-	$(INSTALL) quotex $(DESTDIR)/quotex; \
+	$(INSTALL) quotez $(DESTDIR)/quotez; \
 	$(INSTALL) quotes.json $(DESTDIR)/quotes.json
 
 .PHONY:
 clean:
-	rm -f quotex.o quotex
+	rm -f quotez.o quotez
