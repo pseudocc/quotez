@@ -4,12 +4,14 @@ CC=gcc
 INSTALL=install
 
 DESTDIR=${PREFIX}/bin
+SHAREDIR=${PREFIX}/share/quotez
+
 LDFLAGS+=-ljson-c
 
 all: quotez
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $^ -o $@
+	$(CC) $(CFLAGS) -c $^ -DDATADIR="\"$(SHAREDIR)\"" -o $@
 
 quotez: quotez.o
 	$(CC) $^ $(LDFLAGS) -o $@
@@ -17,8 +19,9 @@ quotez: quotez.o
 .PHONY:
 install: quotez quotes.json
 	$(INSTALL) -d $(DESTDIR)
-	$(INSTALL) quotez $(DESTDIR)/quotez; \
-	$(INSTALL) quotes.json $(DESTDIR)/quotes.json
+	$(INSTALL) -d $(SHAREDIR)
+	$(INSTALL) quotez $(DESTDIR)/quotez
+	$(INSTALL) -m 644 quotes.json $(SHAREDIR)/quotes.json
 
 .PHONY:
 clean:

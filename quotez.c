@@ -2,6 +2,12 @@
 #include <stdlib.h>
 #include <json-c/json.h>
 
+#ifndef DATADIR
+#define DATADIR ""
+#endif
+
+#define JSONPATH (DATADIR "/quotes.json")
+
 void print_quote(array_list* quotes, size_t i) {
   size_t n_quotes = array_list_length(quotes);
   json_object* item = array_list_get_idx(quotes, i % n_quotes);
@@ -11,7 +17,11 @@ void print_quote(array_list* quotes, size_t i) {
 }
 
 int main(int argc, const char* args[]) {
-  json_object* root = json_object_from_file("quotes.json");;
+  json_object* root = json_object_from_file(JSONPATH);
+  if (root == NULL) {
+    fprintf(stderr, "Failed to load quotes from json file: %s\n", JSONPATH);
+    return 1;
+  }
   array_list* quotes = json_object_get_array(root);
 
   if (argc > 1) {
