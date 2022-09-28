@@ -1,3 +1,9 @@
+quotez (0.2.2-rm1) jammy; urgency=medium
+
+  * Remove 2 quotes from JSON file.
+
+ -- Atlas Yu <atlas.yu@canonical.com>  Wed, 28 Sep 2022 16:30:10 +0800
+
 quotez (0.2.2-1) jammy; urgency=medium
 
   * Fix debuild.
