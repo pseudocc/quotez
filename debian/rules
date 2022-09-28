@@ -2,6 +2,9 @@
 
 PREFIX=$(CURDIR)/debian/quotez/usr
 
+override_dh_auto_build:
+	$(MAKE) PREFIX="/usr"
+
 override_dh_auto_install:
 	$(MAKE) install PREFIX="$(PREFIX)"
 
