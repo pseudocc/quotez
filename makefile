@@ -16,13 +16,13 @@ all: quotez
 quotez: quotez.o
 	$(CC) $^ $(LDFLAGS) -o $@
 
-.PHONY:
 install: quotez quotes.json
 	$(INSTALL) -d $(DESTDIR)
 	$(INSTALL) -d $(SHAREDIR)
 	$(INSTALL) quotez $(DESTDIR)/quotez
 	$(INSTALL) -m 644 quotes.json $(SHAREDIR)/quotes.json
 
-.PHONY:
 clean:
 	rm -f quotez.o quotez
+
+.PHONY: clean install
