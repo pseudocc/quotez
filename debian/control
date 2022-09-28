@@ -1,0 +1,11 @@
+Source: quotez
+Standards-Version: 0.2.2
+Section: misc
+Priority: optional
+Maintainer: Atlas Yu <atlas.yu@canonical.com>
+Build-Depends: libjson-c-dev (>= 0.15), gcc-11 (>= 11.2.0), make (>= 4.3), debhelper-compat (= 13)
+
+Package: quotez
+Architecture: all
+Depends: libjson-c5 (>= 0.15), ${misc:Depends}, ${shlibs:Depends}
+Description: Print some inspirational quotes to the console.
