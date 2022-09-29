@@ -8,12 +8,17 @@ SHAREDIR=${PREFIX}/share/quotez
 
 LDFLAGS+=-ljson-c
 
+QUOTEZS=quotez quotez_debug
+
 all: quotez
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $^ -DDATADIR="\"$(SHAREDIR)\"" -o $@
 
-quotez: quotez.o
+%_debug.o: %.c
+	$(CC) -g $(CFLAGS) -c $^ -o $@ -DDEBUG
+
+$(QUOTEZS): %: %.o
 	$(CC) $^ $(LDFLAGS) -o $@
 
 install: quotez quotes.json
@@ -23,6 +28,6 @@ install: quotez quotes.json
 	$(INSTALL) -m 644 quotes.json $(SHAREDIR)/quotes.json
 
 clean:
-	rm -f quotez.o quotez
+	rm -f *.o $(QUOTEZS)
 
 .PHONY: clean install
