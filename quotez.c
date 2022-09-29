@@ -3,7 +3,7 @@
 #include <json-c/json.h>
 
 #ifndef DATADIR
-#define DATADIR ""
+#define DATADIR "."
 #endif
 
 #define JSONPATH (DATADIR "/quotes.json")
@@ -11,9 +11,10 @@
 void print_quote(array_list* quotes, size_t i) {
   size_t n_quotes = array_list_length(quotes);
   json_object* item = array_list_get_idx(quotes, i % n_quotes);
-  json_object* tobj = json_object_object_get(item, "text");
-
-  printf("%s\n", json_object_get_string(tobj));
+  json_object* text = json_object_object_get(item, "text");
+  json_object* author = json_object_object_get(item, "author");
+  
+  printf("%s\t-- %s\n", json_object_get_string(text), json_object_get_string(author));
 }
 
 int main(int argc, const char* args[]) {
